@@ -19,7 +19,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/templates/user_req.html">Requests</a>
+                        <a class="nav-link active" aria-current="page" href="/templates/user_dash.html">Home</a>
                         <li class="nav-item">
                         <a class="nav-link" href="/templates/login.html">Logout</a>
                         </li>
@@ -30,15 +30,16 @@
 
             <!-- table management -->
             <div id="mngetable">
-                <h2 class="headings">Available Tables</h2>
+                <h2 class="headings">Your Reservations</h2>
 
                 <table class="table text-center border">
                     <thead>
                         <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Table No.</th>
-                        <th scope="col">Capacity</th>
-                        <th scope="col">Location</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time Slot</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -46,9 +47,10 @@
                         <tr>
                         <th scope="row">1</th>
                         <td>T1</td>
-                        <td>10</td>
-                        <td>Indoor</td>
-                        <td> <a href="/templates/create_table.html" class="btn btn-primary">Reserve</a></td>
+                        <td>10-03-2026</td>
+                        <td>7PM-9PM</td>
+                        <td>Pending</td>
+                        <td> <a href="/templates/create_table.html" class="btn btn-danger">Cancel</a></td>
                         </tr>
                     </tbody>
                 </table>
