@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requests Dashboard</title>
+    <title>Manager Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -19,7 +19,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/templates/mngr_req.html">Requests</a>
+                        <a class="nav-link active" aria-current="page" href="/templates/manager_dash.html">Home</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="#">Summary</a>
@@ -27,26 +27,23 @@
                         <li class="nav-item">
                         <a class="nav-link" href="/templates/login.html">Logout</a>
                         </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>       
+                    </ul>      
                     </div>
                 </div>
             </nav>
 
             <!-- table management -->
             <div id="mngetable">
-                <h2 class="headings">Manage Tables</h2>
+                <h2 class="headings">All Reservations</h2>
 
                 <table class="table text-center border">
                     <thead>
                         <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Table No.</th>
-                        <th scope="col">Capacity</th>
-                        <th scope="col">Location</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time Slot</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                         </tr>
@@ -55,19 +52,17 @@
                         <tr>
                         <th scope="row">1</th>
                         <td>T1</td>
-                        <td>10</td>
-                        <td>Indoor</td>
-                        <td>Available</td>
+                        <td>John</td>
+                        <td>12-03-2026</td>
+                        <td>7PM-9PM</td>
+                        <td>Pending</td>
                         <td>
-                            <a href="/templates/update_table.html" class="btn btn-warning mx-2">Update</a>
-                            <a href="/templates/create_table.html" class="btn btn-danger">Delete</a>
+                            <a href="/templates/update_table.html" class="btn btn-success mx-2">Approve</a>
+                            <a href="/templates/create_table.html" class="btn btn-danger">Reject</a>
                         </td>
                         </tr>
                     </tbody>
-                </table>
-                <div>
-                    <a href="/templates/create_table.html" class="btn btn-success">Create Table</a>
-                </div>
+                </table>        
             </div>
          </div>
     </div>

@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
 }
+
 #form-body{
     height: 410px;
     width: 300px;
@@ -15,4 +16,19 @@
     margin: auto;
     padding: 20px;
     border-radius: 8px;
+}
+#canva2{
+    height: 100vh;
+    width: 60vw;
+    margin: auto;
+}
+
+#mngetable{
+    padding: 9px;
+    margin-top: 10px;
+    border: 1px solid grey;
+}
+nav{
+    margin-top: 5PX;
+    border: 1px solid grey; 
 }
