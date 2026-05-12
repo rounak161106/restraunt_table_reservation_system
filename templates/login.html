@@ -17,16 +17,18 @@
         <div id="canva">
             <div id="form-body">
                 <h2>Login</h2>
-                <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control" id="username">
-                </div>
-                <div class="mb-3">
-                <label for="pwd" class="form-label">Password</label>
-                <input type="password" class="form-control" id="pwd">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Login">
-                <p style="margin-top: 5px;">Don't have an account? <a href="/templates/register.html">Register</a></p>
+                <form action="/login" method="POST">
+                    <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                    <label for="pwd" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="pwd">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Login">
+                    <p style="margin-top: 5px;">Don't have an account? <a href="/templates/register.html">Register</a></p>
+                </form>
             </div>
         </div>
     </div>
