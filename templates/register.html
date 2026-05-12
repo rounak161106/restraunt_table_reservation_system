@@ -12,20 +12,22 @@
         <div id="canva">
             <div id="form-body">
                 <h2>Register</h2>
-                <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control" id="username">
-                </div>
-                <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email">
-                </div>
-                <div class="mb-3">
-                <label for="pwd" class="form-label">Password</label>
-                <input type="password" class="form-control" id="pwd">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Sign Up">
-                <p style="margin-top: 5px;">Already have an account? <a href="/templates/login.html">Login</a></p>
+                <form action="/register" method="POST">
+                    <div class="mb-3"> 
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                    <label for="pwd" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pwd" name="password">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Sign Up">
+                    <p style="margin-top: 5px;">Already have an account? <a href="/login">Login</a></p>
+                </form>
             </div>
         </div>
     </div>
