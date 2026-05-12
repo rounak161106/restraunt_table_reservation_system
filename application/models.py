@@ -6,5 +6,20 @@ class User(db.Model):
     email = db.Column(db.String, unique = True, nullable = False)
     password = db.Column(db.String, unique = True, nullable = False)
     role = db.Column(db.String, nullable = False, default = 'customer')
+    reservations = db.relationship('Reservation', backref = 'user')
 
-    
+class Table(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    table_number = db.Column(db.Integer, unique = True, nullable = False)
+    capacity = db.Column(db.Integer, nullable = False)
+    location = db.Column(db.String, nullable = False)
+    status = db.Column(db.String, default = 'available', nullable = False)
+    reservations = db.relationship('Reservation', backref = 'table')
+
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
+    table_id = db.Column(db.Integer, db.ForeignKey('table.id'), nullable = False)
+    date = db.Column(db.String, nullable = False)
+    time_slot = db.Column(db.String, nullable = False)
+    status = db.Column(db.String, default = 'pending', nullable = False)
