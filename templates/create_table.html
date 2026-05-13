@@ -18,28 +18,30 @@
         <div id="canva">
             <div id="form-body">
                 <h2>Create Table</h2>
-                <div class="mb-3">
-                    <label for="table_number" class="form-label">Table Number</label>
-                    <input type="text" class="form-control" id="table_number">
-                </div>
+                <form action="/create_table" method="POST">
+                    <div class="mb-3">
+                        <label for="table_number" class="form-label">Table Number</label>
+                        <input type="text" class="form-control" id="table_number" name="table_number">
+                    </div>
 
-                <div class="mb-3">
-                    <label for="capacity" class="form-label">Capacity</label>
-                    <input type="number" class="form-control" id="capacity">
-                </div>
+                    <div class="mb-3">
+                        <label for="capacity" class="form-label">Capacity</label>
+                        <input type="number" class="form-control" id="capacity" name="capacity">
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Location</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Select</option>
-                        <option value="In">Indoor</option>
-                        <option value="Out">Outdoor</option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <select class="form-select" aria-label="Default select example" name="location">
+                            <option selected>Select</option>
+                            <option value="In">Indoor</option>
+                            <option value="Out">Outdoor</option>
+                        </select>
+                    </div>
 
-                <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Create">
-                </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Create">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

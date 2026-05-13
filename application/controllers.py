@@ -40,9 +40,24 @@ def register():
 def manager_dash():
     this_user = User.query.filter_by(role = 'manager').first()
     all_tables = Table.query.all()
-    return render_template('manager_dash.html',name = this_user.username, all_tables = all_tables)
+    return render_template('manager_dash.html',this_user = this_user, all_tables = all_tables)
     
 @app.route('/user/<int:id>')
 def user_dash(id):
     this_user = User.query.get(id)
     return render_template("user_dash.html", this_user = this_user)
+
+@app.route('/create_table', methods = ["GET", "POST"])
+def create_table():
+    if request.method == "POST":
+        table_number = request.form.get("table_number")
+        this_table =  Table.query.filter_by(table_number = table_number).first()
+        if this_table:
+            return "Table no. already exists, try different!!"
+        capacity = request.form.get("capacity")
+        location = request.form.get("location")
+        new_table = Table(table_number = table_number, capacity = capacity, location = location)
+        db.session.add(new_table)
+        db.session.commit()
+        return redirect('/manager')
+    return render_template('create_table.html')
