@@ -45,7 +45,8 @@ def manager_dash():
 @app.route('/user/<int:id>')
 def user_dash(id):
     this_user = User.query.get(id)
-    return render_template("user_dash.html", this_user = this_user)
+    all_tables = Table.query.filter_by(status = 'available').all()
+    return render_template("user_dash.html", this_user = this_user, tables = all_tables)
 
 @app.route('/create_table', methods = ["GET", "POST"])
 def create_table():

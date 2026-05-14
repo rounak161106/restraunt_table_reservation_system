@@ -43,13 +43,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>T1</td>
-                        <td>10</td>
-                        <td>Indoor</td>
-                        <td> <a href="/templates/create_table.html" class="btn btn-primary">Reserve</a></td>
-                        </tr>
+                        {% for i in tables %}
+                            <tr>
+                                <td scope="row">1</td>
+                                <td>{{i.table_number}}</td>
+                                <td>{{i.capacity}}</td>
+                                <td>{{i.location}}</td>
+                                <td> <a href="/reserve" class="btn btn-primary">Reserve</a></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
