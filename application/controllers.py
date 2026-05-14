@@ -89,10 +89,18 @@ def delete_table(id):
     db.session.commit()
     return redirect('/manager')
 
-@app.route('/reserve/<int:table_id>/<int:user_id>')
+@app.route('/reserve/<int:table_id>/<int:user_id>', methods=["GET", "POST"])
 def reserve_table(table_id,user_id):
     this_table = Table.query.get(table_id)
-    this_user = Table.query.get(user_id)
+    this_user = User.query.get(user_id)
+    if request.method == "POST":
+        time = request.form.get("time")
+        date = request.form.get("date")
+        this_rsrvn = Reservation(user_id = user_id, date = date, time_slot = time, table_id = table_id)
+        db.session.add(this_rsrvn)
+        db.session.commit()
+        return redirect(f"/user/{user_id}")
+    return render_template('reserve.html', table = this_table, user = this_user)
 
 @app.route('/manager/requests')
 def mgr_request():
@@ -105,3 +113,7 @@ def mgr_request(id):
     this_user = User.query.get(id)
     reservations = Reservation.query.filter_by(id = id).all()
     return render_template("mngr_req.html", user = this_user, reservations = reservations)
+
+@app.route('/approve/<int:id>')
+
+@app.route('/cancel/<int:int>')

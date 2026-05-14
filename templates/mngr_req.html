@@ -49,18 +49,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for i in reservations %}
                         <tr>
-                        <th scope="row">1</th>
-                        <td>T1</td>
-                        <td>John</td>
-                        <td>12-03-2026</td>
-                        <td>7PM-9PM</td>
-                        <td>Pending</td>
+                        <tr scope="row">{{ i.id }}</tr>
+                        <td>{{ i.table.table_number }}</td>
+                        <td>{{ i.user.username }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time_slot }}</td>
+                        <td>{{ i.status }}</td>
                         <td>
-                            <a href="/templates/update_table.html" class="btn btn-success mx-2">Approve</a>
-                            <a href="/templates/create_table.html" class="btn btn-danger">Reject</a>
+                            <a href="/approve/{{i.id}}" class="btn btn-success mx-2">Approve</a>
+                            <a href="/reject/{{i.id}}" class="btn btn-danger">Reject</a>
                         </td>
                         </tr>
+                        {%endfor %}
                     </tbody>
                 </table>        
             </div>

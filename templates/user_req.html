@@ -21,7 +21,7 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/user/{{ user.id }}">Home</a>
                         <li class="nav-item">
-                        <a class="nav-link" href="/templates/login.html">Logout</a>
+                        <a class="nav-link" href="/">Logout</a>
                         </li>
                     </ul>       
                     </div>
@@ -44,14 +44,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for i in reservations %}
                         <tr>
-                        <th scope="row">1</th>
-                        <td>T1</td>
-                        <td>10-03-2026</td>
-                        <td>7PM-9PM</td>
-                        <td>Pending</td>
-                        <td> <a href="/templates/create_table.html" class="btn btn-danger">Cancel</a></td>
+                        <th scope="row">{{ i.id }}</th>
+                        <td>{{i.table.table_number}}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time }}</td>
+                        <td>{{ i.status }}</td>
+                        <td> <a href="/cancel/{id.id}" class="btn btn-danger">Cancel</a></td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
