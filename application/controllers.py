@@ -66,6 +66,8 @@ def user_dash(id):
 
 @app.route('/create_table', methods = ["GET", "POST"])
 def create_table():
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     if request.method == "POST":
         table_number = request.form.get("table_number")
         this_table =  Table.query.filter_by(table_number = table_number).first()
@@ -82,6 +84,8 @@ def create_table():
 
 @app.route('/update_table/<int:id>', methods = ["GET", "POST"])
 def update_table(id):
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     this_table = Table.query.get(id)
     if request.method == "POST":
         table_number = request.form.get("table_number")
@@ -102,6 +106,8 @@ def update_table(id):
 
 @app.route('/delete_table/<int:id>')
 def delete_table(id):
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     this_table = Table.query.get(id)
     db.session.delete(this_table)
     db.session.commit()
@@ -109,6 +115,8 @@ def delete_table(id):
 
 @app.route('/reserve/<int:table_id>/<int:user_id>', methods=["GET", "POST"])
 def reserve_table(table_id,user_id):
+    if 'user_id' not in session or session['user_id'] != user_id:
+        return redirect('/login')
     this_table = Table.query.get(table_id)
     this_user = User.query.get(user_id)
     if request.method == "POST":
@@ -122,18 +130,24 @@ def reserve_table(table_id,user_id):
 
 @app.route('/manager/requests')
 def mgr_request():
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     mgr = User.query.filter_by(role = 'manager').first()
     reservations = Reservation.query.filter_by(status = "pending").all()
     return render_template("mngr_req.html", user = mgr, reservations = reservations)
 
 @app.route('/user/requests/<int:id>')
 def user_request(id):
+    if 'user_id' not in session or session['user_id'] != id:
+        return redirect('/login')
     this_user = User.query.get(id)
     reservations = Reservation.query.filter_by(user_id = id).all()
     return render_template("user_req.html", user = this_user, reservations = reservations)
 
 @app.route('/approve/<int:id>')
 def approve(id):
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     this_rsrvn = Reservation.query.get(id)
     this_rsrvn.status = 'approved'
     db.session.commit()
@@ -141,6 +155,8 @@ def approve(id):
 
 @app.route('/reject/<int:id>')
 def reject(id):
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     this_rsrvn = Reservation.query.get(id)
     this_rsrvn.status = 'rejected'
     db.session.commit()
@@ -148,6 +164,8 @@ def reject(id):
 
 @app.route('/cancel/<int:id>/<int:user_id>')
 def cancel(id, user_id):
+    if 'user_id' not in session or session['user_id'] != user_id:
+        return redirect('/login')
     this_rsrvn = Reservation.query.get(id)
     db.session.delete(this_rsrvn)
     db.session.commit()
@@ -155,6 +173,8 @@ def cancel(id, user_id):
 
 @app.route('/manager/summary')
 def summary():
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     mgr = User.query.filter_by(role = 'manager').first()
     total_tables = Table.query.count()
     total_reservations = Reservation.query.count()
@@ -166,6 +186,8 @@ def summary():
 
 @app.route('/manager/search')
 def search_tables():
+    if 'user_id' not in session or session['role'] != 'manager':
+        return redirect('/login')
     this_user = User.query.filter_by(role = 'manager').first()
     query = request.args.get('query', '')
     if query:
