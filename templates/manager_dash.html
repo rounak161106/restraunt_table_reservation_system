@@ -54,13 +54,13 @@
                     <tbody>
                         {% for i in all_tables %}
                             <tr>
-                                <td scope="row">{{ loop.index }}</td>
+                                <td scope="row">{{ i.id }}</td>
                                 <td>{{ i.table_number }}</td>
                                 <td>{{ i.capacity }}</td>
                                 <td>{{ i.location }}</td>
                                 <td>{{ i.status }}</td>
                                 <td>
-                                    <a href="/update_table" class="btn btn-warning mx-2">Update</a>
+                                    <a href="/update_table/{{i.id}}" class="btn btn-warning mx-2">Update</a>
                                     <a href="/delete_table" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
