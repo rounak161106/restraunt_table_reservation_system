@@ -132,3 +132,10 @@ def reject(id):
     this_rsrvn.status = 'rejected'
     db.session.commit()
     return redirect('/manager/requests')
+
+@app.route('/cancel/<int:id>/<int:user_id>')
+def cancel(id, user_id):
+    this_rsrvn = Reservation.query.get(id)
+    db.session.delete(this_rsrvn)
+    db.session.commit()
+    return redirect(f'/user/requests/{user_id}')
