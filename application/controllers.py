@@ -108,12 +108,12 @@ def mgr_request():
     reservations = Reservation.query.filter_by(status = "pending").all()
     return render_template("mngr_req.html", user = mgr, reservations = reservations)
 
-@app.route('/user/requests/<int:id')
-def mgr_request(id):
+@app.route('/user/requests/<int:id>')
+def user_request(id):
     this_user = User.query.get(id)
-    reservations = Reservation.query.filter_by(id = id).all()
-    return render_template("mngr_req.html", user = this_user, reservations = reservations)
+    reservations = Reservation.query.filter_by(user_id = id).all()
+    return render_template("user_req.html", user = this_user, reservations = reservations)
 
-@app.route('/approve/<int:id>')
+# @app.route('/approve/<int:id>')
 
-@app.route('/cancel/<int:int>')
+# @app.route('/cancel/<int:int>')
