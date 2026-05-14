@@ -150,3 +150,17 @@ def summary():
     rejected = Reservation.query.filter_by(status = 'rejected').count()
     total_users = User.query.filter_by(role = 'customer').count()
     return render_template("summary.html", user = mgr, total_tables = total_tables, total_reservations = total_reservations, pending = pending, approved = approved, rejected = rejected, total_users = total_users)
+
+@app.route('/manager/search')
+def search_tables():
+    this_user = User.query.filter_by(role = 'manager').first()
+    query = request.args.get('query', '')
+    if query:
+        all_tables = Table.query.filter(
+            (Table.table_number.like(f'%{query}%')) |
+            (Table.location.like(f'%{query}%')) |
+            (Table.status.like(f'%{query}%'))
+        ).all()
+    else:
+        all_tables = Table.query.all()
+    return render_template('manager_dash.html', this_user = this_user, all_tables = all_tables)
