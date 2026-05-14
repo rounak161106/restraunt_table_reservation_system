@@ -104,7 +104,7 @@ def reserve_table(table_id,user_id):
 
 @app.route('/manager/requests')
 def mgr_request():
-    mgr = User.query.filter_by(role = 'Manager').first()
+    mgr = User.query.filter_by(role = 'manager').first()
     reservations = Reservation.query.filter_by(status = "pending").all()
     return render_template("mngr_req.html", user = mgr, reservations = reservations)
 
