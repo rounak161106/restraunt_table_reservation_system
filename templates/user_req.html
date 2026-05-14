@@ -49,9 +49,9 @@
                         <th scope="row">{{ i.id }}</th>
                         <td>{{i.table.table_number}}</td>
                         <td>{{ i.date }}</td>
-                        <td>{{ i.time }}</td>
+                        <td>{{ i.time_slot }}</td>
                         <td>{{ i.status }}</td>
-                        <td> <a href="/cancel/{id.id}" class="btn btn-danger">Cancel</a></td>
+                        <td> <a href="/cancel/{{i.id}}/{{user.id}}" class="btn btn-danger">Cancel</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
