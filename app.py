@@ -5,6 +5,7 @@ app = None
 def create_app():
     app = Flask(__name__)
     app.debug = True
+    app.secret_key = 'edine-secret-key'
     app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///e-dine.sqlite3'
     db.init_app(app)
     app.app_context().push()

@@ -17,6 +17,9 @@
         <div id="canva">
             <div id="form-body">
                 <h2>Update Table</h2>
+                {% for msg in get_flashed_messages() %}
+                    <div class="alert alert-danger">{{ msg }}</div>
+                {% endfor %}
                 <form action="/update_table/{{ table.id }}" method="POST">
                 <div class="mb-3">
                     <label for="table_number" class="form-label">Table Number</label>

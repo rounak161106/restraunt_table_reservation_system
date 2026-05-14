@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect, url_for, flash
 from flask import current_app as app
 from .models import *
 
@@ -15,9 +15,11 @@ def login():
                     return redirect('/manager')
                 return redirect(f'/user/{this_user.id}')
             else:
-                return "Incorrect Password"
+                flash("Incorrect Password")
+                return redirect('/login')
         else:
-            return "User doesn't exists!!"
+            flash("User doesn't exists!!")
+            return redirect('/login')
     return render_template('login.html')
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -29,7 +31,8 @@ def register():
         user_name = User.query.filter_by(username = username).first()
         user_email = User.query.filter_by(email = email).first()
         if user_name or user_email:
-            return "User already exists"
+            flash("User already exists")
+            return redirect('/register')
         this_user = User(username = username, password = password, email = email)
         db.session.add(this_user)
         db.session.commit()
@@ -54,7 +57,8 @@ def create_table():
         table_number = request.form.get("table_number")
         this_table =  Table.query.filter_by(table_number = table_number).first()
         if this_table:
-            return "Table no. already exists, try different!!"
+            flash("Table no. already exists, try different!!")
+            return redirect('/create_table')
         capacity = request.form.get("capacity")
         location = request.form.get("location")
         new_table = Table(table_number = table_number, capacity = capacity, location = location)
@@ -73,7 +77,8 @@ def update_table(id):
         status = request.form.get("status")
         existing = Table.query.filter_by(table_number = table_number).first()
         if existing and existing.table_number != this_table.table_number:
-            return "Table number already exists, try something else"
+            flash("Table number already exists, try something else")
+            return redirect(f'/update_table/{id}')
         this_table.table_number = table_number
         this_table.capacity = capacity
         this_table.location = location
