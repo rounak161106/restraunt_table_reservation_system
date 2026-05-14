@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Dashboard</title>
+    <title>Summary</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -19,10 +19,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/manager">Home</a>
+                        <a class="nav-link" href="/manager">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="/manager/summary">Summary</a>
+                        <a class="nav-link" href="/manager/requests">Requests</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="/login">Logout</a>
@@ -32,39 +32,32 @@
                 </div>
             </nav>
 
-            <!-- table management -->
+            <!-- summary section -->
             <div id="mngetable">
-                <h2 class="headings">All Reservations</h2>
+                <h2 class="headings">Summary</h2>
 
                 <table class="table text-center border">
                     <thead>
                         <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Table No.</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Time Slot</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Total Tables</th>
+                        <th scope="col">Total Reservations</th>
+                        <th scope="col">Pending</th>
+                        <th scope="col">Approved</th>
+                        <th scope="col">Rejected</th>
+                        <th scope="col">Total Users</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in reservations %}
                         <tr>
-                        <td scope="row">{{ i.id }}</td>
-                        <td>{{ i.table.table_number }}</td>
-                        <td>{{ i.user.username }}</td>
-                        <td>{{ i.date }}</td>
-                        <td>{{ i.time_slot }}</td>
-                        <td>{{ i.status }}</td>
-                        <td>
-                            <a href="/approve/{{i.id}}" class="btn btn-success mx-2">Approve</a>
-                            <a href="/reject/{{i.id}}" class="btn btn-danger">Reject</a>
-                        </td>
+                            <td>{{ total_tables }}</td>
+                            <td>{{ total_reservations }}</td>
+                            <td>{{ pending }}</td>
+                            <td>{{ approved }}</td>
+                            <td>{{ rejected }}</td>
+                            <td>{{ total_users }}</td>
                         </tr>
-                        {%endfor %}
                     </tbody>
-                </table>        
+                </table>
             </div>
          </div>
     </div>

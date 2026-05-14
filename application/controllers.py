@@ -139,3 +139,14 @@ def cancel(id, user_id):
     db.session.delete(this_rsrvn)
     db.session.commit()
     return redirect(f'/user/requests/{user_id}')
+
+@app.route('/manager/summary')
+def summary():
+    mgr = User.query.filter_by(role = 'manager').first()
+    total_tables = Table.query.count()
+    total_reservations = Reservation.query.count()
+    pending = Reservation.query.filter_by(status = 'pending').count()
+    approved = Reservation.query.filter_by(status = 'approved').count()
+    rejected = Reservation.query.filter_by(status = 'rejected').count()
+    total_users = User.query.filter_by(role = 'customer').count()
+    return render_template("summary.html", user = mgr, total_tables = total_tables, total_reservations = total_reservations, pending = pending, approved = approved, rejected = rejected, total_users = total_users)
