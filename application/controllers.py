@@ -88,3 +88,20 @@ def delete_table(id):
     db.session.delete(this_table)
     db.session.commit()
     return redirect('/manager')
+
+@app.route('/reserve/<int:table_id>/<int:user_id>')
+def reserve_table(table_id,user_id):
+    this_table = Table.query.get(table_id)
+    this_user = Table.query.get(user_id)
+
+@app.route('/manager/requests')
+def mgr_request():
+    mgr = User.query.filter_by(role = 'Manager').first()
+    reservations = Reservation.query.filter_by(status = "pending").all()
+    return render_template("mngr_req.html", user = mgr, reservations = reservations)
+
+@app.route('/user/requests/<int:id')
+def mgr_request(id):
+    this_user = User.query.get(id)
+    reservations = Reservation.query.filter_by(id = id).all()
+    return render_template("mngr_req.html", user = this_user, reservations = reservations)
