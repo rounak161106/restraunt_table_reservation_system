@@ -119,6 +119,16 @@ def user_request(id):
     reservations = Reservation.query.filter_by(user_id = id).all()
     return render_template("user_req.html", user = this_user, reservations = reservations)
 
-# @app.route('/approve/<int:id>')
+@app.route('/approve/<int:id>')
+def approve(id):
+    this_rsrvn = Reservation.query.get(id)
+    this_rsrvn.status = 'approved'
+    db.session.commit()
+    return redirect('/manager/requests')
 
-# @app.route('/cancel/<int:int>')
+@app.route('/reject/<int:id>')
+def reject(id):
+    this_rsrvn = Reservation.query.get(id)
+    this_rsrvn.status = 'rejected'
+    db.session.commit()
+    return redirect('/manager/requests')
