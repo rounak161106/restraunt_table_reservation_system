@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for, flash
+from flask import request, render_template, redirect, url_for, flash, session
 from flask import current_app as app
 from .models import *
 
@@ -11,6 +11,8 @@ def login():
         this_user = User.query.filter_by(username = username).first()
         if this_user:
             if this_user.password == password:
+                session['user_id'] = this_user.id
+                session['role'] = this_user.role
                 if this_user.role == 'manager':
                     return redirect('/manager')
                 return redirect(f'/user/{this_user.id}')
@@ -38,15 +40,26 @@ def register():
         db.session.commit()
         return redirect("/login") 
     return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
         
 @app.route('/manager')
 def manager_dash():
+    if 'user_id' not in session or session['role'] != 'manager':
+        flash("Please login first")
+        return redirect('/login')
     this_user = User.query.filter_by(role = 'manager').first()
     all_tables = Table.query.all()
     return render_template('manager_dash.html',this_user = this_user, all_tables = all_tables)
     
 @app.route('/user/<int:id>')
 def user_dash(id):
+    if 'user_id' not in session or session['user_id'] != id:
+        flash("Please login first")
+        return redirect('/login')
     this_user = User.query.get(id)
     all_tables = Table.query.filter_by(status = 'available').all()
     return render_template("user_dash.html", this_user = this_user, tables = all_tables)
