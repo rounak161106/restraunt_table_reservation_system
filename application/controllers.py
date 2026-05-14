@@ -62,3 +62,29 @@ def create_table():
         db.session.commit()
         return redirect('/manager')
     return render_template('create_table.html')
+
+@app.route('/update_table/<int:id>', methods = ["GET", "POST"])
+def update_table(id):
+    this_table = Table.query.get(id)
+    if request.method == "POST":
+        table_number = request.form.get("table_number")
+        capacity = request.form.get("capacity")
+        location = request.form.get("location")
+        status = request.form.get("status")
+        existing = Table.query.filter_by(table_number = table_number).first()
+        if existing and existing.table_number != this_table.table_number:
+            return "Table number already exists, try something else"
+        this_table.table_number = table_number
+        this_table.capacity = capacity
+        this_table.location = location
+        this_table.status = status
+        db.session.commit()
+        return redirect('/manager')
+    return render_template("update_table.html", table = this_table)
+
+@app.route('/delete_table/<int:id>')
+def delete_table(id):
+    this_table = Table.query.get(id)
+    db.session.delete(this_table)
+    db.session.commit()
+    return redirect('/manager')

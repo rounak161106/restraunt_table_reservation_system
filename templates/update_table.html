@@ -17,37 +17,47 @@
         <div id="canva">
             <div id="form-body">
                 <h2>Update Table</h2>
+                <form action="/update_table/{{ table.id }}" method="POST">
                 <div class="mb-3">
                     <label for="table_number" class="form-label">Table Number</label>
-                    <input type="text" class="form-control" id="table_number">
+                    <input type="text" class="form-control" value="{{ table.table_number }}" id="table_number" name="table_number">
                 </div>
 
                 <div class="mb-3">
                     <label for="capacity" class="form-label">Capacity</label>
-                    <input type="number" class="form-control" id="capacity">
+                    <input type="number" class="form-control" value="{{ table.capacity }}" id="capacity" name="capacity">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Location</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Select</option>
-                        <option value="In">Indoor</option>
-                        <option value="Out">Outdoor</option>
+                    <select class="form-select" aria-label="Default select example" name="location">
+                        {% if table.location == 'In' %}
+                            <option value="In">Indoor</option>
+                            <option value="Out">Outdoor</option>
+                        {% else %}
+                            <option value="Out">Outdoor</option>
+                            <option value="In">Indoor</option>
+                        {% endif %}
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Status</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Select</option>
-                        <option value="A">Available</option>
-                        <option value="NA">Not Available</option>
+                    <select class="form-select" aria-label="Default select example" name="status">
+                        {% if table.status == 'available' %}                
+                            <option value="available">Available</option>
+                            <option value="not available">Not Available</option>
+                        {% else %}
+                            <option value="not available">Not Available</option>
+                            <option value="available">Available</option>
+                        {% endif %}
                     </select>
                 </div>
 
                 <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Create">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </div>
+                </form>
             </div>
         </div>
     </div>
